@@ -9,22 +9,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:rgehenrypoitier/main.dart';
+import 'package:rgehenrypoitier/src/app/pages/list/book_widget.dart';
+import 'package:rgehenrypoitier/src/app/widgets/app_cart_price.dart';
+import 'package:rgehenrypoitier/src/domain/entities/book.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Testing unadded book widget', (WidgetTester tester) async {
+    Book bk = Book("isbn", 'title', 1, "cover", ["synopsis", "rge"]);
+    await tester.pumpWidget(MaterialApp(
+      home: Material(
+        child: BookWidget(
+          book: bk,
+          alreadyInCart: true,
+        ),
+      ),
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.byIcon(Icons.remove_shopping_cart_outlined), findsOneWidget);
+  });
+  testWidgets('Testing added book widget', (WidgetTester tester) async {
+    Book bk = Book("isbn", 'title', 1, "cover", ["synopsis", "rge"]);
+    await tester.pumpWidget(MaterialApp(
+      home: Material(
+        child: BookWidget(
+          book: bk,
+          alreadyInCart: false,
+        ),
+      ),
+    ));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.byIcon(Icons.add_shopping_cart_outlined), findsOneWidget);
   });
 }
