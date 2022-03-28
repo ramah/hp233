@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:rgehenrypoitier/main.dart';
 import 'package:rgehenrypoitier/src/domain/entities/book.dart';
-import 'package:rgehenrypoitier/src/services/http_book_service.dart';
+import 'package:rgehenrypoitier/src/services/books/http_books_service.dart';
 
 class BooksProvider with ChangeNotifier {
   List<Book> books = [];
@@ -12,15 +12,16 @@ class BooksProvider with ChangeNotifier {
   bool isSearching = false;
 
   Future<void> getBooks() async {
-    books = await getIt<HttpBookService>().getBooks();
+    books = await getIt<HttpBooksService>().getBooks();
     booksLoaded = true;
     notifyListeners();
   }
 
-  void addBookToCart(Book book) {
+  void addBookToCart(Book book) async {
     if (!selected.contains(book)) {
       selected.add(book);
     }
+
     notifyListeners();
   }
 
@@ -33,6 +34,7 @@ class BooksProvider with ChangeNotifier {
 
   void emptyCart() {
     selected = [];
+    
     notifyListeners();
   }
 

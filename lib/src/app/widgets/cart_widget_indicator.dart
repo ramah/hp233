@@ -15,11 +15,12 @@ class CartWidgetIndicator extends StatelessWidget {
               position: BadgePosition.topEnd(),
               showBadge: providerModel.selected.isNotEmpty,
               badgeContent: Text(providerModel.selected.length.toString()),
-              badgeColor: Colors.red,
+              badgeColor: Theme.of(context).colorScheme.primary,
               animationDuration: const Duration(milliseconds: 350),
               child: const Icon(
                 Icons.shopping_cart,
                 size: 40,
+                color: Colors.black,
               ),
             )),
       ),

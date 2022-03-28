@@ -1,4 +1,4 @@
-package com.henry.poitier.rge.rgehenrypoitier
+package com.henry.poitier.rge
 
 import io.flutter.embedding.android.FlutterActivity
 

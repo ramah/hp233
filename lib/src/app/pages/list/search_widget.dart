@@ -7,7 +7,7 @@ class SearchWidget extends StatelessWidget {
 // will call the provider
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Row( 
       children: [
         Expanded(
             child: TextFormField(
@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
             ),
           ),
           onChanged: (value) {
-            Provider.of<BooksProvider>(context, listen: false).search(value);
+            context.read<BooksProvider>().search(value);
           },
         ))
       ],
